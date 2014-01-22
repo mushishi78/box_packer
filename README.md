@@ -18,6 +18,8 @@ Usage
 -----
 
 ```Ruby
+require "box_packer"
+
 container = BoxPacker::Container.new("MyContainer", [6, 3, 7], 50)
 
 container.items << BoxPacker::Item.new("MyItem01", [1, 5, 3], 10)
