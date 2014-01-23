@@ -136,7 +136,7 @@ module BoxPacker
 		end
 
 		def items_all_light_enough?
-			@items.all? { |item| item.weight < @weight_limit } 
+			@items.all? { |item| item.weight <= @weight_limit } 
 		end
 
 		def pack_box(current_items, box_to_pack)
