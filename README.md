@@ -6,10 +6,16 @@ A heuristic first-fit 3D bin packing algorithm with optional weight and bin limi
 Installation
 ------------
 
-Install gem or add to gemfile:
+Install gem:
 
 ``` console
 gem  install 'box_packer'
+```
+
+Or add to gemfile:
+
+``` ruby
+gem  'box_packer'
 ```
 
 Usage
@@ -45,15 +51,15 @@ With optional labels, weights and packings limit:
 BoxPacker.container [15, 20, 13], label: 'Parcel', weight_limit: 50, packings_limit: 3 do 
 	add_item [2, 3, 5], label: 'Shoes', weight: 47
 	add_item [3, 3, 1], label: 'Watch', weight: 24
-	add_item [0, 1, 4], label: 'Bag',   weight:  7
+	add_item [1, 1, 4], label: 'Bag',   weight:  7
 	pack! # returns 2
 
 	puts self  	# |Container| Parcel 20x15x13 Weight Limit:50 Packings Limit:3
 				# |  Packing| Remaining Volume:3870 Remaining Weight:3
 				# |     Item| Shoes 5x3x2 (0,0,0) Volume:30 Weight:47
-				# |  Packing| Remaining Volume:3891 Remaining Weight:19
+				# |  Packing| Remaining Volume:3887 Remaining Weight:19
 				# |     Item| Watch 3x3x1 (0,0,0) Volume:9 Weight:24
-				# |     Item| Bag 4x1x0 (3,0,0) Volume:0 Weight:7
+				# |     Item| Bag 4x1x1 (3,0,0) Volume:4 Weight:7
 end
 ```
 
