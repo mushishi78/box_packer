@@ -4,15 +4,19 @@ require_relative 'item'
 module BoxPacker
 
 	def self.builder(&b)
-		instance_exec(&b) if block_given?
+		b.call(Builder.new) if block_given?
+	end
+
+	class Builder
+
+		def container(*args, &b)
+			Container.new(*args, &b)
+		end
+
+		def item(*args)
+			Item.new(*args)
+		end
+
 	end
 	
-	def self.item(*args)
-		Item.new(*args)
-	end
-
-	def self.container(*args)
-		Container.new(*args)
-	end
-
 end

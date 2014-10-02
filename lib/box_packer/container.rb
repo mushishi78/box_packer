@@ -5,9 +5,14 @@ require_relative 'item'
 require_relative 'packer'
 
 module BoxPacker
+
+	def self.container(*args, &b)
+		Container.new(*args, &b)
+	end
+
 	class Container < Box
-		attr_accessor :label, :weight_limit, :packings_limit, :items
-		attr_reader :packing, :packings, :packed_successfully
+		attr_accessor :label, :weight_limit, :packings_limit
+		attr_reader :items, :packing, :packings, :packed_successfully
 
 		def initialize(dimensions, opts={}, &b)
 			super(Dimensions[*dimensions])
@@ -16,11 +21,19 @@ module BoxPacker
 			@packings_limit = opts[:packings_limit]
 			@items = opts[:items] || []
 			orient!
-      		self.instance_exec(&b) if b
+      		self.instance_exec(&b) if block_given?
+		end
+
+		def add_item(*args)
+			items << Item.new(*args)
 		end
 
 		def <<(item)
-			items << item
+			items << item.dup
+		end
+
+		def items=(new_items)
+			@items = new_items.map(&:dup)
 		end
 
 		def pack!

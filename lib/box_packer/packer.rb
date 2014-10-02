@@ -8,7 +8,7 @@ module BoxPacker
 		def_delegators :container, :new_packing!, :packings_limit, :packings, :packing
 
 		def pack
-			@items = container.items.sort_by(&:volume).reverse
+			@items = container.items.sort_by!(&:volume).reverse!
 
 			until too_many_packings? do
 				new_packing!
