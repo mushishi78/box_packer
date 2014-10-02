@@ -1,46 +1,58 @@
 BoxPacker
 =========
 
-A Heuristic First-Fit 3D Bin Packing Algorithm with Weight Limit. 
+A heuristic first-fit 3D bin packing algorithm with optional weight and bin limits. 
 
 Installation
 ------------
 
-Add this line to your application's Gemfile:
+Install gem or add to gemfile:
 
-    gem 'box_packer'
-
-And then execute:
-
-    $ bundle
+``` console
+gem  install 'box_packer'
+```
 
 Usage
 -----
 
-```Ruby
-require "box_packer"
+``` ruby
+require 'box_packer'
 
-container = BoxPacker::Container.new("MyContainer", [6, 3, 7], 50)
+BoxPacker.builder do 
+	c = container [3, 6, 7]
+	c.items = [item([1, 3, 5]), item([4, 3, 5]), item([3, 5, 5])]
+	c.pack! # returns 2
 
-container.items << BoxPacker::Item.new("MyItem01", [1, 5, 3], 10)
-container.items << BoxPacker::Item.new("MyItem02", [2, 5, 2], 13)
-container.items << BoxPacker::Item.new("MyItem03", [5, 5, 3], 36)
+	puts c.packed_successfully	            # true
+	puts c.packings.count	                # 2
+	puts c.packings[0].include? c.items[1] 	# false
+	puts c.packings[0][1].position          # (5,0,0)
 
-container.pack          #=> 2
-puts container
+	puts c  # |Container| 7x6x3
+			# |  Packing| Remaining Volume:36
+			# |     Item| 5x5x3 (0,0,0) Volume:75
+			# |     Item| 1x5x3 (5,0,0) Volume:15
+			# |  Packing| Remaining Volume:66
+			# |     Item| 5x4x3 (0,0,0) Volume:60
+	
+end
 ```
 
-``` console
-*** MyContainer - [3, 6, 7] V:126 WL:50 PL:3 ***
+With optional labels, weights and packings limit:
 
-MyItem01 - [1, 3, 5] V:15 W:10
-MyItem02 - [2, 2, 5] V:20 W:13
-MyItem03 - [3, 5, 5] V:75 W:36
+``` ruby
+BoxPacker.builder do 
+	c = container [15, 20, 13], label: 'Parcel', weight_limit: 50, packings_limit: 3 
+	c << item([2, 3, 5], label: 'Shoes', weight: 47)
+	c << item([3, 3, 1], label: 'Watch', weight: 24)
+	c << item([0, 1, 4], label: 'Bag',   weight:  7)
+	c.pack! # returns 2
 
-Packing 0 RW:1 RV:31
-MyItem03 - [3, 5, 5] Pos:[0, 0, 0] V:75 W:36
-MyItem02 - [2, 5, 2] Pos:[0, 0, 5] V:20 W:13
-
-Packing 1 RW:40 RV:111
-MyItem01 - [1, 3, 5] Pos:[0, 0, 0] V:15 W:10
+	puts c  # |Container| Parcel 20x15x13 Weight Limit:50 Packings Limit:3
+			# |  Packing| Remaining Volume:3870 Remaining Weight:3
+			# |     Item| Shoes 5x3x2 (0,0,0) Volume:30 Weight:47
+			# |  Packing| Remaining Volume:3891 Remaining Weight:19
+			# |     Item| Watch 3x3x1 (0,0,0) Volume:9 Weight:24
+			# |     Item| Bag 4x1x0 (3,0,0) Volume:0 Weight:7
+end
 ```
