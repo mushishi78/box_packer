@@ -4,11 +4,13 @@ require_relative 'dimensions'
 module BoxPacker
 	class Item < Box
 		attr_accessor :label, :weight
+		attr_reader :colour
 
 		def initialize(dimensions, opts={})
 			super(Dimensions[*dimensions])
-			@label = opts[:label]
+			@label = opts[:label].to_s
 			@weight = opts[:weight]
+			@colour = opts[:colour] || "%06x" % (rand * 0xffffff)
 		end
 
 		def fit_into?(box)

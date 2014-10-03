@@ -91,3 +91,22 @@ BoxPacker.builder do |b|
 
 end
 ```
+
+Export SVG
+----------
+
+``` ruby
+BoxPacker.container [3, 4, 2] do 
+	add_item [1,3,2], label: 'Bag', colour: 'red'
+	add_item [3,3,1], label: 'Hat', colour: 'blue'
+	add_item [1,2,2], label: 'Shoes', colour: 'green'
+	add_item [3,1,1], label: 'Slipper', colour: 'purple'
+	add_item [2,1,1], label: 'Dragon', colour: 'orange'
+	pack!
+	draw!('examples/example', scale_longest_side_to: 500, margin: 15)
+end
+```
+
+Output:
+
+![SVG Output](https://rawgithub.com/mushishi78/box_packer/examples/example01.svg)

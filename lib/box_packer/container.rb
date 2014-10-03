@@ -3,6 +3,7 @@ require_relative 'packing'
 require_relative 'dimensions'
 require_relative 'item'
 require_relative 'packer'
+require_relative 'svg_exporter'
 
 module BoxPacker
 
@@ -56,6 +57,12 @@ module BoxPacker
 			s << " Packings Limit:#{packings_limit}" if packings_limit
 			s << "\n"
 			s << (@packings ? @packings : items).map(&:to_s).join 
+		end
+
+		def draw!(filename, opts={})
+			exporter = SVGExporter.new(self, opts)
+			exporter.draw
+			exporter.save(filename)
 		end
 
 	private

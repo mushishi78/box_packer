@@ -22,5 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
 
   spec.add_dependency 'attr_extras'
+  spec.add_dependency 'rasem'
 
 end
