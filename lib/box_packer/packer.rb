@@ -21,7 +21,7 @@ module BoxPacker
 	private
 
 		def too_many_packings?
-			packings.count >= packings_limit - 1 if packings_limit
+			packings.count >= packings_limit if packings_limit
 		end
 
 		def pack_box(possible_items, box)

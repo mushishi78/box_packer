@@ -45,16 +45,18 @@ BoxPacker.container [3, 6, 7] do
 end
 ```
 
-With optional labels, weights and packings limit:
+With optional labels, weights, quantity and packings limit:
 
 ``` ruby
 BoxPacker.container [15, 20, 13], label: 'Parcel', weight_limit: 50, packings_limit: 3 do 
-	add_item [2, 3, 5], label: 'Shoes', weight: 47
+	add_item [2, 3, 5], label: 'Shoes', weight: 47, quantity: 2
 	add_item [3, 3, 1], label: 'Watch', weight: 24
 	add_item [1, 1, 4], label: 'Bag',   weight:  7
 	pack! # returns 2
 
 	puts self  	# |Container| Parcel 20x15x13 Weight Limit:50 Packings Limit:3
+				# |  Packing| Remaining Volume:3870 Remaining Weight:3
+				# |     Item| Shoes 5x3x2 (0,0,0) Volume:30 Weight:47
 				# |  Packing| Remaining Volume:3870 Remaining Weight:3
 				# |     Item| Shoes 5x3x2 (0,0,0) Volume:30 Weight:47
 				# |  Packing| Remaining Volume:3887 Remaining Weight:19

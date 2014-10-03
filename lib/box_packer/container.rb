@@ -25,8 +25,11 @@ module BoxPacker
       		self.instance_exec(&b) if block_given?
 		end
 
-		def add_item(*args)
-			items << Item.new(*args)
+		def add_item(dimensions, opts={})
+			quantity = opts.delete(:quantity) || 1
+			quantity.times do
+				items << Item.new(dimensions, opts)
+			end
 		end
 
 		def <<(item)
@@ -40,8 +43,11 @@ module BoxPacker
 		def pack!
 			prepare_to_pack!
 			return unless packable?
-			@packed_successfully = Packer.pack(self)
-			packings.count
+			if @packed_successfully = Packer.pack(self)
+				packings.count
+			else
+				@packings = []
+			end
 		end
 
 		def new_packing!
@@ -56,7 +62,11 @@ module BoxPacker
 			s << " Weight Limit:#{weight_limit}" if weight_limit
 			s << " Packings Limit:#{packings_limit}" if packings_limit
 			s << "\n"
-			s << (@packings ? @packings : items).map(&:to_s).join 
+			if packed_successfully
+				s << packings.map(&:to_s).join
+			else
+				s << "|         | Did Not Pack!"
+			end
 		end
 
 		def draw!(filename, opts={})
