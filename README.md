@@ -109,4 +109,4 @@ end
 
 Output:
 
-![SVG Output](https://rawgithub.com/mushishi78/box_packer/examples/example01.svg)
+![SVG Output](https://rawgit.com/mushishi78/box_packer/master/examples/example1.svg)
