@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
 
-  spec.add_dependency 'attr_extras'
-  spec.add_dependency 'rasem'
+  spec.add_dependency 'attr_extras', '~> 3.1.0' 
+  spec.add_dependency 'rasem', '~> 0.6.0'
 
 end
