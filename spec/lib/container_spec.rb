@@ -24,7 +24,7 @@ module BoxPacker
 						Dimensions[10, 9, 9]
 					]}
 
-					it { expect(items.map(&:dimensions)).to eql(expected_dimensions) }
+					it { expect(container.items.map(&:dimensions)).to eql(expected_dimensions) }
 					it { expect(container.packings).to eql([]) }
 				end
 
@@ -58,7 +58,7 @@ module BoxPacker
 				end
 
 				context 'with an item to large' do 
-					before { items[0].dimensions = Dimensions[26, 34, 8] }
+					before { container.items[0].dimensions = Dimensions[26, 34, 8] }
 					it { expect(container.send(:packable?)).to be(false) }					
 				end
 

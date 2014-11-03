@@ -47,6 +47,7 @@ module BoxPacker
 				packings.count
 			else
 				@packings = []
+				false
 			end
 		end
 

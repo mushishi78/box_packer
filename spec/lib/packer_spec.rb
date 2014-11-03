@@ -50,7 +50,7 @@ module BoxPacker
 				end
 
 				it do 
-					expect(container.pack!).to eql(0)
+					expect(container.pack!).to be(false)
 					expect(container.packed_successfully).to be(false)
 				end
 			end
