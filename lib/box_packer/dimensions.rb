@@ -3,6 +3,14 @@ require 'matrix'
 module BoxPacker
 	class Dimensions < Vector
 
+		def +(d)
+			Dimensions[*super]
+		end
+
+		def -(d)
+			Dimensions[*super]
+		end
+
 		def width
 			Dimensions[self[0], 0, 0]
 		end
