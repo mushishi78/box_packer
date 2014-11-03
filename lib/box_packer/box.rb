@@ -6,9 +6,14 @@ require_relative 'dimensions'
 module BoxPacker
 	class Box
 		extend Forwardable
-		attr_initialize :dimensions, [:position]
+
 		def_delegators :dimensions, :volume, :each_rotation, :width, :height, :depth
 		attr_accessor :dimensions, :position
+
+		def initialize(dimensions, options={})
+			@dimensions = dimensions.is_a?(Dimensions) ? dimensions : Dimensions[*dimensions]
+			@position = options[:position]
+		end
 
 		def position
 			@position ||= Position[0, 0, 0]
@@ -23,7 +28,7 @@ module BoxPacker
 		end
 
 		def sub_boxes(item)	
-			sub_boxes = sub_boxes_args(item).select{ |(d, p)| d.volume > 0 }
+			sub_boxes = sub_boxes_args(item).select{ |(d, p)| Dimensions[*d].volume > 0 }
 			sub_boxes.map!{ |args| Box.new(*args) }
 			sub_boxes.sort_by!(&:volume).reverse!
 		end
