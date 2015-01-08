@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.summary      = '3D bin-packing algorithm with optional weight and bin limits.'
   s.files        = Dir['LICENSE.txt', 'README.md', 'lib/**/*']
   s.require_path = 'lib'
-  s.add_runtime_dependency 'attire', '~> 0.0', '>= 0.0.2'
+  s.add_runtime_dependency 'attire', '~> 0.0', '>= 0.0.3'
   s.add_runtime_dependency 'rasem', '~> 0.6'
   s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
 end
