@@ -1,6 +1,8 @@
 BoxPacker
 =========
 
+[![Gem Version](https://badge.fury.io/rb/box_packer.svg)](http://badge.fury.io/rb/box_packer)
+
 A heuristic first-fit 3D bin packing algorithm with optional weight and bin limits.
 
 Installation
