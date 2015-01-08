@@ -19,6 +19,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'rspec', '~> 3.1'
 
-  spec.add_dependency 'attire'
+  spec.add_dependency 'attire', '~> 0'
   spec.add_dependency 'rasem', '~> 0.6'
 end
