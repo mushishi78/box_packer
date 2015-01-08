@@ -6,11 +6,11 @@ module BoxPacker
     attr_accessor :label, :weight
     attr_reader :colour
 
-    def initialize(dimensions, opts={})
+    def initialize(dimensions, opts = {})
       super(Dimensions[*dimensions])
       @label = opts[:label].to_s
       @weight = opts[:weight]
-      @colour = opts[:colour] || "%06x" % (rand * 0xffffff)
+      @colour = opts[:colour] || '%06x' % (rand * 0xffffff)
     end
 
     def fit_into?(box)
@@ -30,6 +30,5 @@ module BoxPacker
       s << " Weight:#{weight}" if weight
       s << "\n"
     end
-    
   end
 end

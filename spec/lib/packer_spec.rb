@@ -1,17 +1,18 @@
 module BoxPacker
-  describe Packer do 
+  describe Packer do
     subject(:container) { Container.new(dimensions) }
     let(:dimensions) { [10, 15, 5] }
     let(:opts) { nil }
-    let(:items){[
-      Item.new([1,1,1], weight: 1),
-      Item.new([3,1,1], weight: 6),
-      Item.new([5,5,1], weight: 15),
-      Item.new([5,5,5], weight: 20)
-    ]}
+    let(:items)do
+      [
+        Item.new([1, 1, 1], weight: 1),
+        Item.new([3, 1, 1], weight: 6),
+        Item.new([5, 5, 1], weight: 15),
+        Item.new([5, 5, 5], weight: 20)
+      ]
+    end
 
-    describe '#pack' do 
-
+    describe '#pack' do
       context 'with items that fit exactly in one packing' do
         before do
           20.times { container.items << items[0].dup }
@@ -19,8 +20,8 @@ module BoxPacker
           8.times { container.items << items[2].dup }
           4.times { container.items << items[3].dup }
         end
-        
-        it do 
+
+        it do
           expect(container.pack!).to eql(1)
           expect(container.packed_successfully).to be(true)
         end
@@ -34,13 +35,13 @@ module BoxPacker
           15.times { container.items << items[3].dup }
         end
 
-        it do 
+        it do
           expect(container.pack!).to eql(3)
           expect(container.packed_successfully).to be(true)
         end
       end
 
-      context 'with a packing limit of one and too many items' do 
+      context 'with a packing limit of one and too many items' do
         before do
           container.packings_limit = 1
           35.times { container.items << items[0].dup }
@@ -49,7 +50,7 @@ module BoxPacker
           15.times { container.items << items[3].dup }
         end
 
-        it do 
+        it do
           expect(container.pack!).to be(false)
           expect(container.packed_successfully).to be(false)
         end
@@ -74,8 +75,6 @@ module BoxPacker
 
         it { expect(container.packed_successfully).to be(true) }
       end
-
     end
-
   end
 end

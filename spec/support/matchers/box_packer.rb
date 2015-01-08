@@ -3,18 +3,17 @@ require 'rspec/matchers/built_in/yield'
 
 module BoxPacker
   module Matchers
-  	
     class YieldEachOnce
       pattr_initialize :expected
-   
-      def matches?(block)    
+
+      def matches?(block)
         @probe = RSpec::Matchers::BuiltIn::YieldProbe.probe(block)
         @actual = @probe.successive_yield_args
 
         @actual.each do |value|
           unless expected.delete(value)
             @failure_value = value
-            return false 
+            return false
           end
         end
         true
@@ -36,6 +35,5 @@ module BoxPacker
     def yield_each_once(expected)
       YieldEachOnce.new(expected)
     end
-
   end
 end

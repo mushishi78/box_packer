@@ -3,10 +3,10 @@ require 'rasem'
 
 module BoxPacker
   class SVGExporter
-    attr_private :container, :scale, :margin, 
+    attr_private :container, :scale, :margin,
                  :images, :image, :image_width, :image_height
 
-    def initialize(container, opts={})
+    def initialize(container, opts = {})
       @container = container
       @images = []
       @margin  = opts[:margin] || 10
@@ -25,7 +25,7 @@ module BoxPacker
       images.each_with_index do |image, i|
         image.close
 
-        File.open("#{filename}#{i + 1}.svg" , "w") do |f|
+        File.open("#{filename}#{i + 1}.svg", 'w') do |f|
           f << image.output
         end
       end
@@ -37,17 +37,16 @@ module BoxPacker
         new_image
         6.times do
           face = Face.new(packing)
-          image.rectangle(*face.outline, stroke: 'black', stroke_width: 1, fill: "white")
+          image.rectangle(*face.outline, stroke: 'black', stroke_width: 1, fill: 'white')
           face.rectangles_and_labels.each do |h|
             image.rectangle(*h[:rectangle])
             image.text(*h[:label])
           end
         end
-        
       end
     end
 
-  private
+    private
 
     def new_image
       @image = Rasem::SVGImage.new(image_width, image_height)
@@ -60,7 +59,7 @@ module BoxPacker
       attr_query :front?
 
       def self.reset(margin, scale, container_dimensions)
-        @@coords_mapping = [0,1,2]
+        @@coords_mapping = [0, 1, 2]
         @@front = true
         @@margin = margin
         @@axes = [margin, margin]
@@ -94,10 +93,10 @@ module BoxPacker
       end
 
       def rectangles_and_labels
-        items.map do |item| 
-          x = axes[0] + item.position[i] * @@scale 
-          y = axes[1] + item.position[j] * @@scale 
-          width = item.dimensions[i] * @@scale 
+        items.map do |item|
+          x = axes[0] + item.position[i] * @@scale
+          y = axes[1] + item.position[j] * @@scale
+          width = item.dimensions[i] * @@scale
           height = item.dimensions[j] * @@scale
           label_x = x + width / 2 - item.label.length
           label_y = y + height / 2
@@ -108,15 +107,13 @@ module BoxPacker
         end
       end
 
-    private
+      private
 
       def sorted_items(packing)
-        items = packing.sort_by{ |i| i.position[k] }
+        items = packing.sort_by { |i| i.position[k] }
         items.reverse! unless front?
         items
       end
-      
     end
-
   end
 end

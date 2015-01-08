@@ -26,15 +26,14 @@ module BoxPacker
     def to_s
       s = "|  Packing| Remaining Volume:#{remaining_volume}"
       s << " Remaining Weight:#{remaining_weight}" if remaining_weight
-      s << "\n" 
-      s << map(&:to_s).join 
+      s << "\n"
+      s << map(&:to_s).join
     end
-    
-  private
+
+    private
 
     def weight?(item)
       remaining_weight && item.weight
     end
-
   end
 end

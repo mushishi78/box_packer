@@ -6,7 +6,6 @@ require_relative 'packer'
 require_relative 'svg_exporter'
 
 module BoxPacker
-
   def self.container(*args, &b)
     Container.new(*args, &b)
   end
@@ -15,17 +14,17 @@ module BoxPacker
     attr_accessor :label, :weight_limit, :packings_limit
     attr_reader :items, :packing, :packings, :packed_successfully
 
-    def initialize(dimensions, opts={}, &b)
+    def initialize(dimensions, opts = {}, &b)
       super(Dimensions[*dimensions])
       @label = opts[:label]
       @weight_limit = opts[:weight_limit]
       @packings_limit = opts[:packings_limit]
       @items = opts[:items] || []
       orient!
-          self.instance_exec(&b) if block_given?
+      instance_exec(&b) if b
     end
 
-    def add_item(dimensions, opts={})
+    def add_item(dimensions, opts = {})
       quantity = opts.delete(:quantity) || 1
       quantity.times do
         items << Item.new(dimensions, opts)
@@ -63,28 +62,24 @@ module BoxPacker
       s << " Weight Limit:#{weight_limit}" if weight_limit
       s << " Packings Limit:#{packings_limit}" if packings_limit
       s << "\n"
-      if packed_successfully
-        s << packings.map(&:to_s).join
-      else
-        s << "|         | Did Not Pack!"
-      end
+      s << packed_successfully ? packings.map(&:to_s).join : '|         | Did Not Pack!'
     end
 
-    def draw!(filename, opts={})
+    def draw!(filename, opts = {})
       exporter = SVGExporter.new(self, opts)
       exporter.draw
       exporter.save(filename)
     end
 
-  private
+    private
 
     def packable?
       return false if items.empty?
       total_weight = 0
 
       items.each do |item|
-        if weight_limit && item.weight 
-          return false if item.weight > weight_limit 
+        if weight_limit && item.weight
+          return false if item.weight > weight_limit
           total_weight += item.weight
         end
 
@@ -92,7 +87,7 @@ module BoxPacker
       end
 
       if weight_limit && packings_limit
-        return total_weight <= weight_limit * packings_limit 
+        return total_weight <= weight_limit * packings_limit
       end
 
       true
@@ -103,6 +98,5 @@ module BoxPacker
       @packings = []
       @packed_successfully = false
     end
-
   end
 end

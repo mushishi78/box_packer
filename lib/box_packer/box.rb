@@ -18,23 +18,22 @@ module BoxPacker
       @dimensions = Dimensions[*dimensions.to_a.sort!.reverse!]
     end
 
-    def >=(other_box)
-      dimensions >= other_box.dimensions
+    def >=(other)
+      dimensions >= other.dimensions
     end
 
-    def sub_boxes(item)  
-      sub_boxes = sub_boxes_args(item).select{ |(d, p)| d.volume > 0 }
-      sub_boxes.map!{ |args| Box.new(*args) }
+    def sub_boxes(item)
+      sub_boxes = sub_boxes_args(item).select { |(d, _)| d.volume > 0 }
+      sub_boxes.map! { |args| Box.new(*args) }
       sub_boxes.sort_by!(&:volume).reverse!
     end
 
-  private
+    private
 
     def sub_boxes_args(item)
-      [[      width +      height + depth - item.width,  position: position + item.width  ],
-       [ item.width +      height + depth - item.height, position: position + item.height ],
-       [ item.width + item.height + depth - item.depth,  position: position + item.depth  ]]
+      [[width +      height + depth - item.width,  position: position + item.width],
+       [item.width +      height + depth - item.height, position: position + item.height],
+       [item.width + item.height + depth - item.depth,  position: position + item.depth]]
     end
-
   end
 end
