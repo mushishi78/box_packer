@@ -3,7 +3,7 @@ require 'rspec/matchers/built_in/yield'
 module BoxPacker
   module Matchers
     class YieldEachOnce
-      pattr_initialize :expected
+      attr_init :expected
 
       def matches?(block)
         @probe = RSpec::Matchers::BuiltIn::YieldProbe.probe(block)

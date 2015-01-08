@@ -2,9 +2,6 @@ require 'rasem'
 
 module BoxPacker
   class SVGExporter
-    attr_private :container, :scale, :margin,
-                 :images, :image, :image_width, :image_height
-
     def initialize(container, opts = {})
       @container = container
       @images = []
@@ -47,6 +44,8 @@ module BoxPacker
 
     private
 
+    attr_reader :container, :scale, :margin, :images, :image, :image_width, :image_height
+
     def new_image
       @image = Rasem::SVGImage.new(image_width, image_height)
       images << image
@@ -54,7 +53,6 @@ module BoxPacker
 
     class Face
       attr_reader :width, :height, :axes
-      attr_private :packing, :i, :j, :k, :front, :items
       attr_query :front?
 
       def self.reset(margin, scale, container_dimensions)
@@ -107,6 +105,8 @@ module BoxPacker
       end
 
       private
+
+      attr_reader :packing, :i, :j, :k, :front, :items
 
       def sorted_items(packing)
         items = packing.sort_by { |i| i.position[k] }

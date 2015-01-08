@@ -1,7 +1,7 @@
 module BoxPacker
   class Packer
     extend Forwardable
-    method_object :pack, :container
+    attr_method :pack, :container
     def_delegators :container, :new_packing!, :packings_limit, :packings, :packing
 
     def pack
