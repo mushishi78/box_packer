@@ -1,5 +1,8 @@
+require_relative '../support/matchers/yield_each_once'
+
 module BoxPacker
   describe Dimensions do
+    include BoxPacker::Matchers
     subject(:dimensions) { Dimensions[2, 10, 3] }
 
     describe '#volume' do

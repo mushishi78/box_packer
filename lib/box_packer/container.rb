@@ -1,10 +1,3 @@
-require_relative 'box'
-require_relative 'packing'
-require_relative 'dimensions'
-require_relative 'item'
-require_relative 'packer'
-require_relative 'svg_exporter'
-
 module BoxPacker
   def self.container(*args, &b)
     Container.new(*args, &b)

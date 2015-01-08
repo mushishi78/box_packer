@@ -1,6 +1,3 @@
-require_relative 'container'
-require_relative 'item'
-
 module BoxPacker
   def self.builder(&b)
     b.call(Builder.new) if block_given?

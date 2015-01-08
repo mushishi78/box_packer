@@ -1,4 +1,3 @@
-require 'attr_extras'
 require 'rspec/matchers/built_in/yield'
 
 module BoxPacker

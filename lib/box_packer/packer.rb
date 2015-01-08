@@ -1,6 +1,3 @@
-require 'attr_extras'
-require 'forwardable'
-
 module BoxPacker
   class Packer
     extend Forwardable

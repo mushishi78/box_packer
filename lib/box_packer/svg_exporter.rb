@@ -1,4 +1,3 @@
-require 'attr_extras'
 require 'rasem'
 
 module BoxPacker
