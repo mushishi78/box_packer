@@ -22,7 +22,7 @@ module BoxPacker
     private
 
     def sub_boxes_args(item)
-      [[width +      height + depth - item.width,  position: position + item.width],
+      [[width +           height + depth - item.width,  position: position + item.width],
        [item.width +      height + depth - item.height, position: position + item.height],
        [item.width + item.height + depth - item.depth,  position: position + item.depth]]
     end
