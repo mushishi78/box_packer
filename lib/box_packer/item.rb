@@ -10,7 +10,7 @@ module BoxPacker
       @colour = opts[:colour] || '%06x' % (rand * 0xffffff)
     end
 
-    def fit_into?(box)
+    def rotate_to_fit_into(box)
       each_rotation do |rotation|
         if box.dimensions >= rotation
           @dimensions = rotation

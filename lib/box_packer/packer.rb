@@ -25,7 +25,7 @@ module BoxPacker
       possible_items = possible_items.dup
       until possible_items.empty?
         item = possible_items.shift
-        next unless item.fit_into?(box)
+        next unless item.rotate_to_fit_into(box)
 
         pack_item!(item, possible_items, box)
         break if possible_items.empty?
