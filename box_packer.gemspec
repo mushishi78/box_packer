@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
   s.version      = version
   s.author       = 'Max White'
   s.email        = 'mushishi78@gmail.com'
+  s.homepage     = 'https://github.com/mushishi78/box_packer'
   s.license      = 'MIT'
   s.summary      = '3D bin-packing algorithm with optional weight and bin limits.'
   s.files        = Dir['LICENSE.txt', 'README.md', 'lib/**/*']
