@@ -55,7 +55,7 @@ module BoxPacker
       s << " Weight Limit:#{weight_limit}" if weight_limit
       s << " Packings Limit:#{packings_limit}" if packings_limit
       s << "\n"
-      s << packed_successfully ? packings.map(&:to_s).join : '|         | Did Not Pack!'
+      s << (packed_successfully ? packings.map(&:to_s).join : '|         | Did Not Pack!')
     end
 
     def draw!(filename, opts = {})
