@@ -1,8 +1,5 @@
-require_relative '../support/matchers/yield_each_once'
-
 module BoxPacker
   describe Dimensions do
-    include BoxPacker::Matchers
     subject(:dimensions) { Dimensions[2, 10, 3] }
 
     describe '#volume' do
@@ -48,7 +45,11 @@ module BoxPacker
         ]
       end
 
-      it { expect { |b| dimensions.each_rotation(&b) }.to yield_each_once(rotations) }
+      it 'matches all rotations' do
+        results = []
+        dimensions.each_rotation { |r| results.push(r) }
+        expect(results).to match_array(rotations)
+      end
     end
   end
 end
