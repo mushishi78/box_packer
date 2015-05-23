@@ -1,12 +1,12 @@
 module BoxPacker
   class Vector
-  	def self.[](*args)
-  		new(*args)
-  	end
+    def self.[](*args)
+      new(*args)
+    end
 
-  	def initialize(x, y, z)
-  		@x, @y, @z = x, y, z
-  	end
+    def initialize(x, y, z)
+      @x, @y, @z = x, y, z
+    end
 
     attr_reader :x, :y, :z
 
