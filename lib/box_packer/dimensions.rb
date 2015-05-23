@@ -11,12 +11,7 @@ module BoxPacker
     end
 
     def each_rotation
-      yield Dimensions[x, y, z]
-      yield Dimensions[x, z, y]
-      yield Dimensions[z, x, y]
-      yield Dimensions[z, y, x]
-      yield Dimensions[y, x, z]
-      yield Dimensions[y, z, x]
+      to_a.permutation.each { |perm| yield Dimensions[*perm] }
     end
 
     def to_s
