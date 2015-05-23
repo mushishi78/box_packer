@@ -30,7 +30,7 @@ BoxPacker.container [3, 6, 7] do
   add_item [1,3,5]
   add_item [4,3,5]
   add_item [3,5,5]
-  pack! # returns 2
+  pack! # 2
 
   puts packed_successfully           # true
   puts packings.count                # 2
@@ -53,7 +53,7 @@ BoxPacker.container [15, 20, 13], label: 'Parcel', weight_limit: 50, packings_li
   add_item [2, 3, 5], label: 'Shoes', weight: 47, quantity: 2
   add_item [3, 3, 1], label: 'Watch', weight: 24
   add_item [1, 1, 4], label: 'Bag',   weight:  7
-  pack! # returns 2
+  pack! # 3
 
   puts self # |Container| Parcel 20x15x13 Weight Limit:50 Packings Limit:3
             # |  Packing| Remaining Volume:3870 Remaining Weight:3

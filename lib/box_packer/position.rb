@@ -1,9 +1,9 @@
-require 'matrix'
+require_relative 'vector'
 
 module BoxPacker
   class Position < Vector
     def to_s
-      "(#{self[0]},#{self[1]},#{self[2]})"
+      "(#{to_a.join(',')})"
     end
   end
 end
