@@ -1,4 +1,3 @@
-require 'attire'
 require 'forwardable'
 
 require 'box_packer/position'

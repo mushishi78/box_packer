@@ -53,7 +53,6 @@ module BoxPacker
 
     class Face
       attr_reader :width, :height, :axes
-      attr_query :front?
 
       def self.reset(margin, scale, container_dimensions)
         @@coords_mapping = [0, 1, 2]
@@ -65,7 +64,7 @@ module BoxPacker
       end
 
       def iterate_class_variables
-        if front?
+        if front
           @@axes[0] = width + @@margin * 2
         else
           @@coords_mapping.rotate!
@@ -110,7 +109,7 @@ module BoxPacker
 
       def sorted_items(packing)
         items = packing.sort_by { |i| i.position[k] }
-        items.reverse! unless front?
+        items.reverse! unless front
         items
       end
     end

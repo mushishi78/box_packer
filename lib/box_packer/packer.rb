@@ -1,7 +1,15 @@
 module BoxPacker
   class Packer
     extend Forwardable
-    attr_method :pack, :container
+
+    def self.pack(container)
+      new(container).pack
+    end
+
+    def initialize(container)
+      @container = container
+    end
+
     def_delegators :container, :new_packing!, :packings_limit, :packings, :packing
 
     def pack
@@ -16,6 +24,8 @@ module BoxPacker
     end
 
     private
+
+    attr_reader :container
 
     def too_many_packings?
       packings.count >= packings_limit if packings_limit

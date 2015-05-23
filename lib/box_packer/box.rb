@@ -1,7 +1,12 @@
 module BoxPacker
   class Box
     extend Forwardable
-    attr_init :dimensions, position: Position[0, 0, 0]
+
+    def initialize(dimensions, opts = {})
+      @dimensions = dimensions
+      @position = opts[:position] || Position[0, 0, 0]
+    end
+
     def_delegators :dimensions, :volume, :each_rotation, :width, :height, :depth
     attr_accessor :dimensions, :position
 
