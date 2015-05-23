@@ -1,3 +1,5 @@
+require 'box_packer/container'
+
 module BoxPacker
   describe Container do
     subject(:container) { Container.new([25, 30, 15]) }

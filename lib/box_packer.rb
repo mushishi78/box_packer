@@ -1,11 +1,2 @@
-require 'forwardable'
-
-require 'box_packer/position'
-require 'box_packer/dimensions'
-require 'box_packer/box'
-require 'box_packer/item'
-require 'box_packer/packer'
-require 'box_packer/packing'
-require 'box_packer/svg_exporter'
 require 'box_packer/container'
 require 'box_packer/builder'

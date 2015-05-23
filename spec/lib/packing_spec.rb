@@ -1,3 +1,5 @@
+require 'box_packer/packing'
+
 module BoxPacker
   describe Packing do
     subject(:packing) { Packing.new(total_volume, total_weight) }

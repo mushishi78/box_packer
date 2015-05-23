@@ -1,3 +1,6 @@
+require_relative 'box'
+require_relative 'dimensions'
+
 module BoxPacker
   class Item < Box
     attr_accessor :label, :weight

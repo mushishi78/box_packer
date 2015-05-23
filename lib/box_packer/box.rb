@@ -1,3 +1,7 @@
+require 'forwardable'
+require_relative 'position'
+require_relative 'dimensions'
+
 module BoxPacker
   class Box
     extend Forwardable

@@ -1,3 +1,5 @@
+require 'box_packer/dimensions'
+
 module BoxPacker
   describe Dimensions do
     subject(:dimensions) { Dimensions[2, 10, 3] }

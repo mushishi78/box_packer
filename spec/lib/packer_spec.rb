@@ -1,3 +1,5 @@
+require 'box_packer/packer'
+
 module BoxPacker
   describe Packer do
     subject(:container) { Container.new(dimensions) }
