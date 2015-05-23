@@ -1,4 +1,5 @@
 require 'box_packer/packing'
+require 'box_packer/item'
 
 module BoxPacker
   describe Packing do

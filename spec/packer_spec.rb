@@ -1,4 +1,5 @@
 require 'box_packer/packer'
+require 'box_packer/container'
 
 module BoxPacker
   describe Packer do
