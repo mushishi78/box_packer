@@ -41,7 +41,7 @@ module BoxPacker
 
     def pack!
       prepare_to_pack!
-      return unless packable?
+      return unless unpackable?
       if @packed_successfully = Packer.pack(self)
         packings.count
       else
@@ -73,24 +73,21 @@ module BoxPacker
 
     private
 
-    def packable?
-      return false if items.empty?
-      total_weight = 0
+    def unpackable?
+      items.empty? || any_item_too_large? || any_item_too_heavy? || items_to_heavy?
+    end
 
-      items.each do |item|
-        if weight_limit && item.weight
-          return false if item.weight > weight_limit
-          total_weight += item.weight
-        end
+    def any_item_too_large?
+      !items.all? { |item| self >= item }
+    end
 
-        return false unless self >= item
-      end
+    def any_item_too_heavy?
+      !weight_limit || items.any? { |item| !item.weight || item.weight > weight_limit }
+    end
 
-      if weight_limit && packings_limit
-        return total_weight <= weight_limit * packings_limit
-      end
-
-      true
+    def items_to_heavy?
+      return false unless weight_limit && packings_limit
+      items.map(&:weight).reduce(&:+) >= weight_limit * packings_limit
     end
 
     def prepare_to_pack!

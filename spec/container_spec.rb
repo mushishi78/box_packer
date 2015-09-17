@@ -52,24 +52,24 @@ module BoxPacker
         end
       end
 
-      describe '#packable?' do
+      describe '#unpackable?' do
         context 'with no items' do
           before { container.items = [] }
-          it { expect(container.send(:packable?)).to be(false) }
+          it { expect(container.send(:unpackable?)).to be(true) }
         end
 
         context 'with items that fit' do
-          it { expect(container.send(:packable?)).to be(true) }
+          it { expect(container.send(:unpackable?)).to be(true) }
         end
 
         context 'with an item to large' do
           before { container.items[0].dimensions = Dimensions[26, 34, 8] }
-          it { expect(container.send(:packable?)).to be(false) }
+          it { expect(container.send(:unpackable?)).to be(true) }
         end
 
         context 'with a weight limit thats lighter than one of the items' do
           before { container.weight_limit = 24 }
-          it { expect(container.send(:packable?)).to be(false) }
+          it { expect(container.send(:unpackable?)).to be(true) }
         end
 
         context 'with a packings limit of one packing' do
@@ -77,12 +77,12 @@ module BoxPacker
 
           context 'with a weight limit thats lighter than items' do
             before { container.weight_limit = 50 }
-            it { expect(container.send(:packable?)).to be(false) }
+            it { expect(container.send(:unpackable?)).to be(true) }
           end
 
           context 'with a weight limit thats heavier than items' do
             before { container.weight_limit = 70 }
-            it { expect(container.send(:packable?)).to be(true) }
+            it { expect(container.send(:unpackable?)).to be(false) }
           end
         end
       end
