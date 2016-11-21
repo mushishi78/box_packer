@@ -81,6 +81,8 @@ module BoxPacker
           weight: item[:weight]
         }
       end
+
+      return nil
     end
 
     def break_up_space(space, placement)
