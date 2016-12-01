@@ -1,5 +1,5 @@
 require 'box_packer'
-
+require 'pry'
 describe '.pack' do
   it do
     packings = BoxPacker.pack(
@@ -27,5 +27,21 @@ describe '.pack' do
     expect(packings[2][:placements][0][:position]).to eql([0, 0, 0])
     expect(packings[2][:placements][1][:dimensions]).to eql([4, 1, 1])
     expect(packings[2][:placements][1][:position]).to eql([3, 0, 0])
+  end
+
+  it 'no weight given' do
+     packings = BoxPacker.pack(
+      container: { dimensions: [13, 15, 20] },
+      items: [
+        { dimensions: [2, 3, 5] },
+        { dimensions: [2, 3, 5] },
+        { dimensions: [3, 3, 1] },
+        { dimensions: [1, 1, 4] },
+      ]
+    )
+    expect(packings.length).to eql(1)
+    expect(packings[0][:weight]).to eql(0.0)
+    # TODO to FIX
+    expect(packings[0][:placements].length).to eql(4)
   end
 end

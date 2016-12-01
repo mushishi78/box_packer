@@ -11,4 +11,5 @@ Gem::Specification.new do |s|
   s.files        = Dir['LICENSE.txt', 'README.md', 'box_packer.rb']
   s.require_path = '.'
   s.add_development_dependency 'rspec', '~> 3.1', '>= 3.1.0'
+  s.add_development_dependency 'pry'
 end
