@@ -31,7 +31,7 @@ module BoxPacker
           end
           break if item_has_been_packed
         end
-        break if item_has_been_packed
+        next if item_has_been_packed
 
         # Can't fit in any of the spaces for the current packings
         # so lets try a new space the size of the container

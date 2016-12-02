@@ -28,4 +28,18 @@ describe '.pack' do
     expect(packings[2][:placements][1][:dimensions]).to eql([4, 1, 1])
     expect(packings[2][:placements][1][:position]).to eql([3, 0, 0])
   end
+  it do
+    packings = BoxPacker.pack(
+      container: { dimensions: [15, 20, 13], weight_limit: 50 },
+      items: [
+        { dimensions: [2, 3, 5], weight: 1 },
+        { dimensions: [2, 3, 5], weight: 1 },
+        { dimensions: [3, 3, 1], weight: 1 },
+        { dimensions: [1, 1, 4], weight: 1 },
+      ]
+    )
+
+    expect(packings.length).to eql(1)
+    expect(packings[0][:placements].length).to eql(4)
+  end
 end
