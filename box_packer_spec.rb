@@ -41,7 +41,6 @@ describe '.pack' do
     )
     expect(packings.length).to eql(1)
     expect(packings[0][:weight]).to eql(0.0)
-    # TODO to FIX
     expect(packings[0][:placements].length).to eql(4)
   end
 end
