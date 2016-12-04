@@ -5,7 +5,7 @@ module BoxPacker
 
       items.each do |item|
         # If the item is just too big for the container lets give up on this
-        raise 'Item is too heavy for container' if item[:weight] > container[:weight_limit]
+        raise 'Item is too heavy for container' if item[:weight].to_f > container[:weight_limit].to_f
 
         # Need a bool so we can break out nested loops once it's been packed
         item_has_been_packed = false
@@ -13,17 +13,17 @@ module BoxPacker
         packings.each do |packing|
           # If this packings going to be too big with this
           # item as well then skip on to the next packing
-          next if packing[:weight] + item[:weight] > container[:weight_limit]
+          next if packing[:weight].to_f + item[:weight].to_f > container[:weight_limit].to_f
 
           packing[:spaces].each do |space|
             # Try placing the item in this space,
-            # if it doesn't fit skip on the next space            
+            # if it doesn't fit skip on the next space
             next unless placement = place(item, space)
 
             # Add the item to the packing and
             # break up the surrounding spaces
             packing[:placements] += [placement]
-            packing[:weight] += item[:weight]
+            packing[:weight] += item[:weight].to_f
             packing[:spaces] -= [space]
             packing[:spaces] += break_up_space(space, placement)
             item_has_been_packed = true
@@ -31,7 +31,7 @@ module BoxPacker
           end
           break if item_has_been_packed
         end
-        break if item_has_been_packed
+        next if item_has_been_packed
 
         # Can't fit in any of the spaces for the current packings
         # so lets try a new space the size of the container
@@ -49,7 +49,7 @@ module BoxPacker
         # and break up the remaing free space around it
         packings += [{
           placements: [placement],
-          weight: item[:weight],
+          weight: item[:weight].to_f,
           spaces: break_up_space(space, placement)
         }]
       end
@@ -78,7 +78,7 @@ module BoxPacker
         return {
           dimensions: perm,
           position: space[:position],
-          weight: item[:weight]
+          weight: item[:weight].to_f
         }
       end
 
