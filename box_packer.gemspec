@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name         = 'box_packer'
-  s.version      = '2.0.1'
+  s.version      = '2.0.3'
   s.author       = 'Max White'
   s.email        = 'mushishi78@gmail.com'
   s.homepage     = 'https://github.com/mushishi78/box_packer'
