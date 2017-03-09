@@ -1,8 +1,8 @@
 module BoxPacker
   class << self
-    def pack(container:, items:)
+    def pack(container:, items:, opts: {})
       packings = []
-
+      items = opts[:preserve_order].to_s == 'true' ?  items : items.sort_by {|i| i[:dimensions].sort.reverse }.reverse
       items.each do |item|
         # If the item is just too big for the container lets give up on this
         raise 'Item is too heavy for container' if item[:weight].to_f > container[:weight_limit].to_f
