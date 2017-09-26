@@ -89,9 +89,9 @@ module BoxPacker
       [
         {
           dimensions: [
-            space[:dimensions][0],
+            space[:dimensions][0] - placement[:dimensions][0],
             space[:dimensions][1],
-            space[:dimensions][2] - placement[:dimensions][0]
+            space[:dimensions][2]
           ],
           position: [
             space[:position][0] + placement[:dimensions][0],
@@ -102,8 +102,8 @@ module BoxPacker
         {
           dimensions: [
             placement[:dimensions][0],
-            space[:dimensions][1],
-            space[:dimensions][2] - placement[:dimensions][1]
+            space[:dimensions][1] - placement[:dimensions][1],
+            space[:dimensions][2]
           ],
           position: [
             space[:position][0],
